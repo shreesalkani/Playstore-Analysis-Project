@@ -1,19 +1,124 @@
-OBJECTIVE
-Google Play Store team is about to launch a new feature where in certain apps that are
-promising are boosted in visibility. The boost will manifest in multiple ways – higher priority in
-recommendations sections (“Similar apps”, “You might also like”, “New and updated games”).
-These will also get a boost in visibility in search results. This feature will help bring more
-attention to newer apps that have potential.
-The task is to understand what makes an app perform well - size? price? category? multiple
-factors together? Analyze the data and present your insights in a format consumable by
-business – the final output of the analysis would be presented to business as insights with
-supporting data/visualizations.
+                                 The playstore-analysis data analysis by using Python libraries.
+                                 
+                                 
+                                 
+
 
 
 # Playstore-Analysis-Project
 The objective of this project is to deliver insights to understand customer demands better and thus help developers to popularize the product. The dataset is chosen from Kaggle. It is of 10k Play Store apps for analyzing the Android market. This dataset contains details of different applications and reviews from different users. Discussion of Google play store dataset will involve various steps such as: loading the data into data frame
-cleaning the data
-extracting statistics from the dataset
-exploratory analysis and visualizations
+
 questions that can be asked from the dataset conclusion We can move to first step of data analysis by cleaning the data that will make the results more accurate. 
-Dataset reference: https://www.kaggle.com/lava18/google-play-store-apps 
+Dataset reference: https://www.kaggle.com/lava18/google-play-store-apps
+
+
+Objective
+Google Play Store team is about to launch a new feature where in certain apps that are promising are boosted in visibility. The boost will manifest in multiple ways – higher priority in recommendations sections (“Similar apps”, “You might also like”, “New and updated games”). These will also get a boost in visibility in search results. This feature will help bring more attention to newer apps that have potential. The task is to understand what makes an app perform well - size? price? category? multiple factors together? Analyze the data and present your insights in a format consumable by business – the final output of the analysis would be presented to business as insights with supporting data/visualizations.
+
+Tasks
+Data clean up – Missing value treatment
+a. Drop records where rating is missing since rating is our target/study variable
+
+b. Check the null values for the Android Ver column.
+
+i. Are all 3 records having the same problem?
+
+ii. Drop the 3rd record i.e. record for “Life Made WIFI …”
+
+iii. Replace remaining missing values with the mode
+
+c. Current ver – replace with most common value
+
+Data clean up – correcting the data types
+a. Which all variables need to be brought to numeric types?
+
+b. Price variable – remove $ sign and convert to float
+
+c. Installs – remove ‘,’ and ‘+’ sign, convert to integer
+
+d. Convert all other identified columns to numeric
+
+Sanity checks – check for the following and handle accordingly
+a. Avg. rating should be between 1 and 5, as only these values are allowed on the play store.
+
+i. Are there any such records? Drop if so.
+
+b. Reviews should not be more than installs as only those who installed can review the app.
+
+i. Are there any such records? Drop if so.
+
+Identify and handle outliers –
+a. Price column
+
+i. Make suitable plot to identify outliers in price
+
+ii. Do you expect apps on the play store to cost $200? Check out these cases
+
+iii. After dropping the useless records, make the suitable plot again to identify outliers
+
+iv. Limit data to records with price < $30
+
+b. Reviews column
+
+i. Make suitable plot
+
+ii. Limit data to apps with < 1 Million reviews
+
+c. Installs
+
+i. What is the 95th percentile of the installs?
+
+ii. Drop records having a value more than the 95th percentile Data analysis to answer business questions
+
+What is the distribution of ratings like? (use Seaborn) More skewed towards higher/lower values?
+a. How do you explain this?
+
+b. What is the implication of this on your analysis?
+
+What are the top Content Rating values?
+a. Are there any values with very few records?
+
+b. If yes, drop those as they won’t help in the analysis
+
+Effect of size on rating
+a. Make a joinplot to understand the effect of size on rating
+
+b. Do you see any patterns?
+
+c. How do you explain the pattern?
+
+Effect of price on rating
+a. Make a jointplot (with regression line)
+
+b. What pattern do you see?
+
+c. How do you explain the pattern?
+
+d. Replot the data, this time with only records with price > 0
+
+e. Does the pattern change?
+
+f. What is your overall inference on the effect of price on the rating
+
+Look at all the numeric interactions together –
+a. Make a pairplort with the colulmns - 'Reviews', 'Size', 'Rating', 'Price'
+
+Rating vs. content rating
+a. Make a bar plot displaying the rating for each content rating
+
+b. Which metric would you use? Mean? Median? Some other quantile?
+
+c. Choose the right metric and plot
+
+Content rating vs. size vs. rating – 3 variables at a time
+a. Create 5 buckets (20% records in each) based on Size
+
+b. By Content Rating vs. Size buckets, get the rating (20th percentile) for each combination
+
+c. Make a heatmap of this
+
+i. Annotated
+
+ii. Greens color map
+
+d. What’s your inference? Are lighter apps preferred in all categories? Heavier? Some?
